@@ -1,181 +1,178 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Users, MapPin, TrendingUp } from "lucide-react"
+import Image from "next/image"
+import { ArrowRight, X } from "lucide-react"
+import { useState } from "react"
 
 const projects = [
   {
     id: 1,
-    title: "Digital Desa Nusantara",
-    description: "Memberdayakan warga desa dengan literasi digital untuk mengembangkan potensi wisata lokal.",
-    location: "Yogyakarta",
-    impact: "300+ warga terlatih",
-    collaborators: 15,
-    category: "Digital Literacy",
-    progress: 85,
-    image: "/placeholder.svg?height=200&width=300",
-    color: "from-green-500 to-emerald-600",
+    className: "font-google-sans",
+    title: "Kerja Nyata Kemasyarakatan",
+    image: "/assets/photo/program/program_kemasyarakatan.jpg",
+    description:
+      "Program kerja nyata kemasyarakatan yang bertujuan untuk membantu dan memberdayakan masyarakat sekitar melalui berbagai kegiatan sosial dan pembangunan. Program ini melibatkan mahasiswa dan relawan untuk terjun langsung ke masyarakat.",
   },
   {
     id: 2,
-    title: "Eco Campus Movement",
-    description: "Gerakan sustainability di kampus dengan program zero waste dan urban farming.",
-    location: "Jakarta",
-    impact: "50kg sampah/hari",
-    collaborators: 23,
-    category: "Environment",
-    progress: 92,
-    image: "/placeholder.svg?height=200&width=300",
-    color: "from-blue-500 to-cyan-600",
+    title: "Forum antar Komunitas",
+    className: "font-google-sans",
+    image: "/assets/photo/program/program_forumkomunitas.jpg",
+    description:
+      "Forum diskusi dan dialog antar komunitas untuk membangun komunikasi yang baik, saling bertukar pengalaman, dan mencari solusi bersama atas berbagai tantangan yang dihadapi komunitas.",
   },
   {
     id: 3,
-    title: "Mental Health Buddy",
-    description: "Platform peer counseling untuk kesehatan mental mahasiswa dengan pendekatan kultural Indonesia.",
-    location: "Bandung",
-    impact: "1000+ sesi konseling",
-    collaborators: 12,
-    category: "Health",
-    progress: 78,
-    image: "/placeholder.svg?height=200&width=300",
-    color: "from-purple-500 to-pink-600",
+    title: "Bantuan Anak Panti Asuhan",
+    className: "font-google-sans",
+    image: "/assets/photo/program/program-pantiasuhan.jpg",
+    description:
+      "Program bantuan untuk anak-anak panti asuhan berupa penyediaan kebutuhan sehari-hari, pendidikan, dan kegiatan pengembangan karakter untuk masa depan yang lebih baik.",
   },
   {
     id: 4,
-    title: "UMKM Digital Boost",
-    description: "Membantu UMKM tradisional go digital dengan marketplace dan digital marketing.",
-    location: "Surabaya",
-    impact: "200+ UMKM online",
-    collaborators: 18,
-    category: "Economy",
-    progress: 95,
-    image: "/placeholder.svg?height=200&width=300",
-    color: "from-orange-500 to-red-600",
+    title: "Pelatihan Remaja Desa",
+    className: "font-google-sans",
+    image: "/assets/photo/program/program_pelatihanremaja.jpg",
+    description:
+      "Program pelatihan keterampilan dan pengembangan diri untuk remaja desa agar memiliki bekal kemampuan yang dapat digunakan untuk meningkatkan kualitas hidup dan ekonomi keluarga.",
+  },
+  {
+    id: 5,
+    title: "Donasi Buku Sekolah",
+    image: "/assets/photo/program/program_donasibuku.jpg",
+    className: "font-google-sans",
+    description:
+      "Program donasi buku-buku pelajaran dan bacaan untuk sekolah yang membutuhkan, guna mendukung pendidikan dan meningkatkan minat baca siswa.",
   },
 ]
 
-export default function GemaTerbaru() {
+export default function ProgramKami() {
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [isHovered, setIsHovered] = useState(false)
+
+  // Duplicate projects once for a seamless loop
+  const loopItems = [...projects, ...projects]
+
+  const openDialog = (project) => {
+    setSelectedProject(project)
+  }
+  const closeDialog = () => {
+    setSelectedProject(null)
+  }
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
+
   return (
-    <section className="py-20 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Gema Terbaru</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Lihat aksi-aksi terbaru yang sedang menciptakan gelombang perubahan di berbagai daerah Indonesia
-          </p>
-        </motion.div>
+    <>
+      <section className="font-google-sans bg-white py-20 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Judul */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-black mb-2">Program kami</h2>
+            <p className="text-base md:text-lg text-slate-700">
+              Program disesuaikan dengan kebutuhan komunitas sekitar
+            </p>
+          </div>
+          {/* Container scroll otomatis dengan fade */}
+          <div className="font-google-sans font-bold relative w-full overflow-hidden">
+            {/* Fade kiri */}
+            <div className="absolute top-0 left-0 h-full w-20 z-20 pointer-events-none bg-gradient-to-r from-white via-white/50 to-transparent" />
+            {/* Fade kanan */}
+            <div className="absolute top-0 right-0 h-full w-20 z-20 pointer-events-none bg-gradient-to-l from-white via-white/50 to-transparent" />
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="group cursor-pointer"
+            <div
+              className="flex gap-6 w-max py-2"
+              style={{
+                animation: "scroll 30s linear infinite",
+                animationPlayState: isHovered ? "paused" : "running", // Smoothly pause/resume animation
+                transform: "translateX(0)", // Initial state
+              }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white">
-                {/* Project Image */}
-                <div className="relative overflow-hidden">
-                  <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+              {loopItems.map((item, i) => (
+                <div
+                  key={`${item.id}-${i}`}
+                  className="min-w-[220px] sm:min-w-[240px] md:min-w-[260px] lg:min-w-[280px] h-[340px] bg-[#d9d9d9] rounded-xl overflow-hidden shadow-lg relative cursor-pointer transform transition-transform duration-500 ease-out hover:scale-[1.02]"
+                >
+                  {/* Gambar sebagai latar belakang */}
+                  <Image
+                    src={item.image || "/placeholder.svg"}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 280px" // `sizes` prop is required when using `fill` [^2][^3]
                   />
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}
-                  />
-
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-white/90 text-slate-700 hover:bg-white">{project.category}</Badge>
-                  </div>
-
-                  {/* Progress Badge */}
-                  <div className="absolute top-4 right-4">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-semibold text-slate-700">
-                      {project.progress}%
+                  {/* Overlay untuk teks agar lebih terbaca */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  {/* Isi dan Tombol panah */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between">
+                    <div className="text-white text-sm sm:text-base font-extrabold leading-tight z-10 flex-1 pr-2">
+                      {item.title}
                     </div>
+                    <button
+                      onClick={() => openDialog(item)}
+                      className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-all duration-200 flex-shrink-0"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-
-                <CardContent className="p-6">
-                  {/* Project Title */}
-                  <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-orange-600 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-slate-600 mb-4 line-clamp-2">{project.description}</p>
-
-                  {/* Project Stats */}
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                      <MapPin className="w-4 h-4" />
-                      <span>{project.location}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                      <TrendingUp className="w-4 h-4" />
-                      <span>{project.impact}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                      <Users className="w-4 h-4" />
-                      <span>{project.collaborators} kolaborator</span>
-                    </div>
-                  </div>
-
-                  {/* Progress Bar */}
-                  <div className="mt-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-slate-700">Progress</span>
-                      <span className="text-sm text-slate-500">{project.progress}%</span>
-                    </div>
-                    <div className="w-full bg-slate-200 rounded-full h-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${project.progress}%` }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        viewport={{ once: true }}
-                        className={`h-2 rounded-full bg-gradient-to-r ${project.color}`}
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </div>
         </div>
-
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-          >
-            Lihat Semua Gema
-          </motion.button>
-        </motion.div>
-      </div>
-    </section>
+        <style jsx>{`
+          @keyframes scroll {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+        `}</style>
+      </section>
+      {/* Dialog/Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="relative">
+              {/* Gambar */}
+              <div className="relative h-64 md:h-80">
+                <Image
+                  src={selectedProject.image || "/placeholder.svg"}
+                  alt={selectedProject.title}
+                  fill
+                  className="object-cover rounded-t-xl"
+                  sizes="(max-width: 768px) 100vw, 672px" // `sizes` prop is required when using `fill` [^2][^3]
+                />
+                {/* Tombol Close */}
+                <button
+                  onClick={closeDialog}
+                  className="absolute top-4 right-4 w-8 h-8 bg-black bg-opacity-50 text-white rounded-full flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              {/* Konten */}
+              <div className="p-6">
+                <h3 className="text-2xl font-extrabold text-black mb-4" style={{ fontFamily: "YDGO12, sans-serif" }}>
+                  {selectedProject.title}
+                </h3>
+                <p className="text-slate-700 leading-relaxed" style={{ fontFamily: "YDGO12, sans-serif" }}>
+                  {selectedProject.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }

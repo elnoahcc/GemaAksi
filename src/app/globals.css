@@ -15,7 +15,7 @@
   --color-gema-orange-700: #c2410c;
   --color-gema-orange-800: #9a3412;
   --color-gema-orange-900: #7c2d12;
-  
+
   --color-gema-blue-50: #eff6ff;
   --color-gema-blue-100: #dbeafe;
   --color-gema-blue-200: #bfdbfe;
@@ -32,7 +32,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
+
   /* UI Component Colors */
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -50,7 +50,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  
+
   /* Border Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -59,9 +59,28 @@
   --radius-2xl: calc(var(--radius) + 8px);
 }
 
+/* Font Face Declarations */
+@font-face {
+  font-family: "Mastfield";
+  src: url("/fonts/Mastfield.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "YDGO12";
+  src: url("/fonts/YDGO12.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Google Sans is loaded via Google Fonts link in layout.tsx */
+
 :root {
   --radius: 0.625rem;
-  
+
   /* Light Theme - GemaAksi Colors */
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -69,15 +88,15 @@
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  
+
   /* Primary = Orange untuk GemaAksi */
   --primary: oklch(0.646 0.222 41.116); /* Orange 500 */
   --primary-foreground: oklch(1 0 0);
-  
+
   /* Secondary = Blue untuk GemaAksi */
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
-  
+
   --muted: oklch(0.968 0.007 247.896);
   --muted-foreground: oklch(0.554 0.046 257.417);
   --accent: oklch(0.968 0.007 247.896);
@@ -95,11 +114,11 @@
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
-  
+
   /* Dark theme primary tetap orange */
   --primary: oklch(0.646 0.222 41.116);
   --primary-foreground: oklch(1 0 0);
-  
+
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);
   --muted: oklch(0.279 0.041 260.031);
@@ -116,32 +135,32 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  
+
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Custom scrollbar untuk GemaAksi */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: oklch(0.968 0.007 247.896);
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: oklch(0.646 0.222 41.116);
     border-radius: 3px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: oklch(0.577 0.245 27.325);
   }
@@ -152,18 +171,31 @@
   .gema-gradient-orange {
     background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   }
-  
+
   .gema-gradient-blue {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   }
-  
+
   .gema-gradient-text {
     background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
+  /* Font utility classes */
+  .font-google-sans {
+    font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .font-mastfield {
+    font-family: 'Mastfield', serif;
+  }
+
+  .font-ydgo12 {
+    font-family: 'YDGO12', sans-serif;
+  }
+
   /* Line clamp utilities */
   .line-clamp-2 {
     display: -webkit-box;
@@ -171,23 +203,23 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   /* Animation utilities */
   .animate-fade-in {
     animation: fade-in 0.5s ease-out;
   }
-  
+
   .animate-slide-up {
     animation: slide-up 0.6s ease-out;
   }
-  
+
   .animate-bounce-gentle {
     animation: bounce-gentle 2s infinite;
   }
@@ -205,7 +237,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes slide-up {
     from {
       opacity: 0;
@@ -216,9 +248,13 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes bounce-gentle {
-    0%, 20%, 50%, 80%, 100% {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
       transform: translateY(0);
     }
     40% {
@@ -228,7 +264,7 @@
       transform: translateY(-3px);
     }
   }
-  
+
   /* Ripple effect for buttons */
   @keyframes ripple {
     0% {
@@ -240,14 +276,14 @@
       opacity: 0;
     }
   }
-  
+
   .ripple-effect {
     position: relative;
     overflow: hidden;
   }
-  
+
   .ripple-effect::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -258,7 +294,7 @@
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
   }
-  
+
   .ripple-effect:active::before {
     width: 300px;
     height: 300px;

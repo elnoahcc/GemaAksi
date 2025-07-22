@@ -7,19 +7,21 @@ import MulaiAksi from "@/components/MulaiAksi"
 import GaleriAksi from "@/components/GaleriAksi"
 import ScrollRevealSection from "@/components/ScrollRevealSection"
 import Interactive3DModel from "@/components/InterActive3DModels"
+import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50">
       <Hero />
+      <ScrollRevealSection />
       <GemaTerbaru />
       <AksiUnggulan />
-      <ScrollRevealSection />
       <CeritaPerubahan />
       <Interactive3DModel />
       <GaleriAksi />
       <KolaborasiHub />
       <MulaiAksi />
+      <Footer />
     </main>
   )
 }

@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const morphingWords = ["Ide", "Aksi", "Gema"]
+import { Card } from "@/components/ui/card"
+import { ArrowRight } from "lucide-react"
+import Image from "next/image"
 
 export default function Hero() {
+  const morphingWords = ["Gema", "Aksi", "Perubahan"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
 
   useEffect(() => {
@@ -18,179 +19,139 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-white to-blue-50">
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-orange-400/20 rounded-full"
-            animate={{
-              x: [0, Math.random() * 100 - 50],
-              y: [0, Math.random() * 100 - 50],
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 2,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+    <section className="relative w-full py-12 md:py-24 lg:py-32 overflow-hidden bg-white" style={{ fontFamily: 'YDGO12, sans-serif' }}>
+      {/* Background Grid */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+          repeating-linear-gradient(
+            0deg,
+            #e5e7eb 0px,
+            #e5e7eb 1px,
+            transparent 1px,
+            transparent 30px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            #e5e7eb 0px,
+            #e5e7eb 1px,
+            transparent 1px,
+            transparent 30px
+          )
+        `,
+          opacity: "0.4",
+        }}
+      />
+      {/* Gradient fade overlay */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, transparent 30%, white 100%)",
+        }}
+      />
 
-      {/* Ripple Effect Background */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute border border-orange-300/30 rounded-full"
-            animate={{
-              scale: [1, 2, 3],
-              opacity: [0.6, 0.3, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: i * 1.3,
-              ease: "easeOut",
-            }}
-            style={{
-              width: "200px",
-              height: "200px",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        {/* Logo/Brand */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-8"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-orange-200">
-            <Sparkles className="w-5 h-5 text-orange-500" />
-            <span className="font-semibold text-slate-700">GemaAksi</span>
+      <div className="container relative z-10 px-4 md:px-6 max-w-6xl mx-auto">
+        <div className="flex flex-col items-start text-left space-y-8">
+          {/* Main Title - Left Aligned with Morphing Effect */}
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4" style={{ fontFamily: 'YDG012, sans-serif' }}>
+              <span className="text-gray-900" style={{ fontFamily: 'YDGO12, sans-serif' }} >Setiap Ide Kecil Bisa Jadi </span>
+              <div className="font-google-sans inline-block relative">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentWordIndex}
+                    initial={{ opacity: 0, y: 20, rotateX: -90 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    exit={{ opacity: 0, y: -20, rotateX: 90 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600"
+                  >
+                    {morphingWords[currentWordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+              <span className="text-gray-900" style={{ fontFamily: 'YDGO12, sans-serif' }}> Besar</span>
+              <span className="inline-block w-3 h-3 bg-blue-600 ml-2" style={{ transform: "rotate(45deg)" }}></span>
+              <span className="inline-block w-3 h-3 bg-orange-500 ml-1" style={{ transform: "rotate(45deg)" }}></span>
+            </h1>
           </div>
-        </motion.div>
 
-        {/* Main Heading with Morphing Text */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-        >
-          <span className="text-slate-800">Setiap </span>
-          <div className="inline-block relative">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={currentWordIndex}
-                initial={{ opacity: 0, y: 20, rotateX: -90 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                exit={{ opacity: 0, y: -20, rotateX: 90 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600"
-              >
-                {morphingWords[currentWordIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </div>
-          <br />
-          <span className="text-slate-800">Kecil Bisa Jadi </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">Gema Besar</span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed"
-        >
-          Platform kolaborasi untuk anak muda Indonesia yang ingin mengubah ide menjadi aksi nyata dan menciptakan
-          dampak positif di masyarakat.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-        >
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            type="button"
-            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-          >
-            <Button
-              size="lg"
-              className="bg-transparent shadow-none px-0 py-0 h-auto min-w-0"
-            >
-              Mulai Aksi Sekarang
+          {/* Main Image Card */}
+          <Card className="relative w-full max-w-5xl h-[300px] md:h-[400px] lg:h-[450px] rounded-2xl overflow-hidden shadow-xl">
+            <Image
+              src="/assets/photo/home.jpg"
+              alt="Smiling children from community"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Subtle dark overlay for better button visibility */}
+            <div className="absolute inset-0 bg-black/20" />
+            <Button className="absolute bottom-6 right-6 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-lg">
+              <ArrowRight className="w-5 h-5" />
             </Button>
-          </motion.button>
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.95 }}
-            className="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-semibold transition-all duration-300 bg-transparent text-lg leading-6"
-          >
-            Jelajahi Gema
-          </motion.button>
-        </motion.div>
+          </Card>
 
-        {/* Stats Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto"
-        >
-          {[
-            { number: "1,250+", label: "Aksi Terealisasi" },
-            { number: "50K+", label: "Orang Terdampak" },
-            { number: "150+", label: "Kota Terjangkau" },
-            { number: "500+", label: "Kolaborator" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              className="text-center transition-transform duration-200 cursor-pointer"
-              whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="text-2xl md:text-3xl font-bold text-slate-800 mb-1">{stat.number}</div>
-              <div className="text-sm text-slate-600">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+          {/* Bottom Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 w-full max-w-5xl mt-8">
+            {/* Card 1: Gabung sekarang */}
+            <div className="flex flex-col items-start">
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden flex items-center w-full">
+                <div className="relative w-32 h-32 flex-shrink-0">
+                  <Image
+                    src="/assets/photo/home2.jpg"
+                    alt="People in traditional attire"
+                    fill
+                    className="object-cover rounded-l-lg"
+                  />
+                </div>
+                <div className="p-4 flex-grow">
+                  <h2 className="font-google-sans text-2xl font-bold mb-1 text-gray-900 leading-tight">
+                    Gabung sekarang.
+                  </h2>
+                  <p className="text-gray-500 text-sm leading-tight"
+                     style={{ fontFamily: 'YDGO12, sans-serif' }}>
+                    Komunitas disekitarmu <span className="font-bold">membutuhkanmu!</span>
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 mt-2 w-full">
+                <div className="h-2 bg-purple-600 rounded-full w-full" />
+                <div className="h-2 bg-purple-400 rounded-full w-full" />
+              </div>
+            </div>
+
+            {/* Card 2: Idemu Berharga! */}
+            <div className="flex flex-col items-start">
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden flex items-center w-full">
+                <div className="relative w-32 h-32 flex-shrink-0">
+                  <Image
+                    src="/assets/photo/home3.jpg"
+                    alt="Two women working on a laptop"
+                    fill
+                    className="object-cover rounded-l-lg"
+                  />
+                </div>
+                <div className="p-4 flex-grow">
+                  <h2 className="font-google-sans text-2xl font-bold mb-1 text-gray-900 leading-tight">
+                    Idemu Berharga!
+                  </h2>
+                  <p className="text-gray-500 text-sm leading-tight"
+                     style={{ fontFamily: 'YDGO12, sans-serif' }}>
+                    Idemu <span className="font-bold">berharga</span> dan menjadi{" "}
+                    <span className="font-bold">dampak yang besar</span> bagi komunitas sekitar
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 mt-2 w-full">
+                <div className="h-2 bg-yellow-400 rounded-full w-full" />
+                <div className="h-2 bg-orange-500 rounded-full w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          className="flex flex-col items-center text-slate-500"
-        >
-          <span className="text-sm mb-2">Scroll untuk melihat gema</span>
-          <ChevronDown className="w-5 h-5" />
-        </motion.div>
-      </motion.div>
     </section>
   )
 }

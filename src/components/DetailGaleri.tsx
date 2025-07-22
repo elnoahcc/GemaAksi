@@ -21,7 +21,7 @@ interface GalleryImage {
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
-    src: "/placeholder.svg?height=800&width=1200&text=Digital+Desa+Nusantara",
+    src: "/assets/photo/galeries/desadigitalslamet.jpg",
     title: "Digital Desa Nusantara",
     subtitle: "Transformasi Digital di Pedesaan",
     description:

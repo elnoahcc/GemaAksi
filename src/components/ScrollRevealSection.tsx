@@ -2,6 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import Image from "next/image"
 
 export default function ScrollRevealSection() {
   const containerRef = useRef(null)
@@ -33,33 +34,35 @@ export default function ScrollRevealSection() {
             style={{ scale: imageScale, opacity: imageOpacity }}
             className="relative w-full h-[60vh] rounded-xl overflow-hidden shadow-2xl flex-shrink-0"
           >
-            <img
-              src="/placeholder.svg?height=700&width=1000&text=Aksi+Nyata+di+Lapangan"
+            <Image
+              src="/assets/photo/mulaidarisini.jpg"
               alt="Aksi Nyata di Lapangan"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              priority
             />
             {/* Subtle gradient overlay for depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="font-google-sans absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </motion.div>
 
           {/* Right side: Text content that reveals on scroll with glowing effect */}
           <div className="flex flex-col justify-center space-y-8">
             <motion.h2
               style={{ opacity: text1Opacity, y: text1Y }}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 drop-shadow-lg"
+              className=" font-google-sans text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 drop-shadow-lg"
             >
               Transformasi Dimulai dari Sini.
             </motion.h2>
             <motion.p
               style={{ opacity: text2Opacity, y: text2Y }}
-              className="text-lg md:text-xl text-slate-200 leading-relaxed"
+              className="text-lg md:text-xl text-slate-200 leading-relaxed font-google-sans"
             >
               Setiap ide brilian, setiap semangat perubahan, kini menemukan wadahnya. GemaAksi adalah katalisator bagi
               generasi muda Indonesia untuk mewujudkan impian menjadi aksi nyata.
             </motion.p>
             <motion.p
               style={{ opacity: text3Opacity, y: text3Y }}
-              className="text-lg md:text-xl text-slate-200 leading-relaxed"
+              className="font-google-sans text-lg md:text-xl text-slate-200 leading-relaxed"
             >
               Kami menghubungkan Anda dengan kolaborator, sumber daya, dan inspirasi untuk menciptakan dampak positif
               yang tak terhingga. Bersama, kita ciptakan gelombang perubahan yang menggema di seluruh negeri.
