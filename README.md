@@ -10,7 +10,7 @@ dan engaging, dengan tampilan responsif serta performa optimal.</p>
 <h2>🏆 Prestasi</h2>
 <ul>
   <li>🥇 <strong>Juara 1 Bytefest UNS 2025</strong></li>
-  <li>Kategori: Web Development & Innovation</li>
+  <li>Kategori: Web Design</li>
 </ul>
 
 <hr>
